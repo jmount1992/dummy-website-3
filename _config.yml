@@ -1,4 +1,6 @@
 
+baseurl: /dummy-website-3
+
 collections:
   publications:
 

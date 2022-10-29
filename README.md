@@ -4,6 +4,11 @@ The following tutorial is based on the [Jekyll's Step by Step Tutorial](https://
 
 The terminal commands are for a Ubuntu operating system, but should be able to be easily recreated in your operating system. 
 
+## Install Ruby, Bundle and Jekyll
+
+Before we get started make sure you have Jekyll installed. You can follow the guides provided by [Jekyll](https://jekyllrb.com/docs/installation/).
+
+## Creating Your Website
  
 1. Create a directory to hold all our files and navigate into the directory. This directory will be referred to as the `root`. You can call it whatever you want. 
     ```bash
@@ -131,7 +136,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     ```
     ```
 
-18. Add the following code to `posts.md`.
+19. Add the following code to `posts.md`.
     ```markdown
     ---
     layout: default
@@ -139,7 +144,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     # Posts
     ```
 
-19. Add each page to the navigation bar by adding the appropriate details into `_data/navigation.yaml`. Your `_data/navigation.yaml` shoud look something like this.
+20. Add each page to the navigation bar by adding the appropriate details into `_data/navigation.yaml`. Your `_data/navigation.yaml` shoud look something like this.
     ```yaml
     - name: Home
       link: /
@@ -151,13 +156,13 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
       link: /posts
     ```
 
-20. Jekyll was originally created for blogging. Jekyll blog posts go in a folder called `_posts`. However, they must follow the format `yyy-mm-dd-title.md`. Create two posts in the `_posts` directory.
+21. Jekyll was originally created for blogging. Jekyll blog posts go in a folder called `_posts`. However, they must follow the format `yyy-mm-dd-title.md`. Create two posts in the `_posts` directory.
     ```bash
     touch _posts/2022-10-29-post_1.md
     touch _posts/2022-10-29-post_2.md
     ```
 
-21. Add the following code to each post. Changing `<number>` to 1 or 2 respectively.
+22. Add the following code to each post. Changing `<number>` to 1 or 2 respectively.
     ```markdown
     ---
     title: Page <number>
@@ -167,7 +172,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     This second paragraph has some more information.
     ```
 
-22. You will notice we didn't include the `layout` key and value in the front matter. We are going to create a new layout for our posts. We want them to look slightly different to other pages. Create the file `_layouts/post.html` and add the following code. Here we are inheriting from the default layout.
+23. You will notice we didn't include the `layout` key and value in the front matter. We are going to create a new layout for our posts. We want them to look slightly different to other pages. Create the file `_layouts/post.html` and add the following code. Here we are inheriting from the default layout.
     ```html
     ---
     layout: default
@@ -184,7 +189,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     {{ content }}
     ```
 
-23. Instead of adding `layout: post` to each of our posts. We can create `_config.yml` and set configuration defaults, including the default layout type for certain folders or page types. Creata a `_config.yml` file in the root directory and add the following code. Information on front matter defaults can be found [here](https://jekyllrb.com/docs/configuration/front-matter-defaults/). The second set here is setting the default for all files of type `pages` to use the default layout. If you wanted you could go remove the `layout` key from our existing files `index.md`, `posts.md`, `publications.md`, and `about.md`. You will need to re-serve the website locally any time you change the configuration file.
+24. Instead of adding `layout: post` to each of our posts. We can create `_config.yml` and set configuration defaults, including the default layout type for certain folders or page types. Creata a `_config.yml` file in the root directory and add the following code. Information on front matter defaults can be found [here](https://jekyllrb.com/docs/configuration/front-matter-defaults/). The second set here is setting the default for all files of type `pages` to use the default layout. If you wanted you could go remove the `layout` key from our existing files `index.md`, `posts.md`, `publications.md`, and `about.md`. You will need to re-serve the website locally any time you change the configuration file.
     ```yaml
     defaults:
         - scope:
@@ -200,9 +205,9 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
             layout: "default"
     ```
 
-24. You will most likely deploy your website using GitHub pages. GitHub page servers are probably not located in your time zone. This can lead to some odd things sometimes happening. To help with this add the following `timezone: Australia/Brisbane` to the `_config.yml` file.
+25. You will most likely deploy your website using GitHub pages. GitHub page servers are probably not located in your time zone. This can lead to some odd things sometimes happening. To help with this add the following `timezone: Australia/Brisbane` to the `_config.yml` file.
 
-25. Change `posts.md` to the following to create a list of your posts.
+26. Change `posts.md` to the following to create a list of your posts.
     ```markdown
     ---
     ---
@@ -214,15 +219,15 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     {% endfor %}
     ```
 
-26. Okay that is enough about blogging. Posts are effectively a special type of what are called *Collections*. We can use [collections](https://jekyllrb.com/docs/step-by-step/09-collections/) to our advantage when things belong to the same group, publications for example. To create a collection make a folder using the format `_<collection_name>` and add this collection name to our configuration file under the `collections` key. In this example, create a folder called `_publications` and then add the following to `_config.yml`.
+27. Okay that is enough about blogging. Posts are effectively a special type of what are called *Collections*. We can use [collections](https://jekyllrb.com/docs/step-by-step/09-collections/) to our advantage when things belong to the same group, publications for example. To create a collection make a folder using the format `_<collection_name>` and add this collection name to our configuration file under the `collections` key. In this example, create a folder called `_publications` and then add the following to `_config.yml`.
     ```yaml
     collections:
         publications:
     ```
 
-27. In the `_publications` folder create two files `_publications/pub1.md` and `_publications/pub2.md`. You will notice we don't have to follow a special naming format like posts.
+28. In the `_publications` folder create two files `_publications/pub1.md` and `_publications/pub2.md`. You will notice we don't have to follow a special naming format like posts.
 
-28. Copy the following into `_publications/pub1.md`. 
+29. Copy the following into `_publications/pub1.md`. 
     ```yaml
     ---
     title: 2D Visual Place Recognition for Domestic Service Robots at Night
@@ -231,7 +236,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     Paper abstract could go here.
     ```
 
-28. Copy the following into `_publications/pub2.md`. 
+30. Copy the following into `_publications/pub2.md`. 
     ```yaml
     ---
     title: Unsupervised Selection of Optimal Operating Parameters for Visual Place Recognition Algorithms using Gaussian Mixture Models
@@ -240,7 +245,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     Paper abstract could go here.
     ```
 
-29. Change `publications.md` to the following to create a list of your publications.
+31. Change `publications.md` to the following to create a list of your publications.
     ```markdown
     ---
     ---
@@ -252,9 +257,9 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     {% endfor %}
     ```
 
-30. Re-serve the website locally, since we made changes to `_config.yml`, to view the results.
+32. Re-serve the website locally, since we made changes to `_config.yml`, to view the results.
 
-31. The website is fairly bland. There are no pictures, CSS, or JavaScript. Images, CSS, and JavaScript are known as assets and are placed in an assets folder. We will make this folder in the next step. First, we will create a [Sass](https://sass-lang.com/) file. Sass is an extension to CSS and is baked into Jekyll. Create a `_sass` folder in the root directory and add a `main.scss` file with the following code. This code will make the font size of each navigation bar item larger and all `<h1>` headings to be coloured green.
+33. The website is fairly bland. There are no pictures, CSS, or JavaScript. Images, CSS, and JavaScript are known as assets and are placed in an assets folder. We will make this folder in the next step. First, we will create a [Sass](https://sass-lang.com/) file. Sass is an extension to CSS and is baked into Jekyll. Create a `_sass` folder in the root directory and add a `main.scss` file with the following code. This code will make the font size of each navigation bar item larger and all `<h1>` headings to be coloured green.
     ```css
     h1 {
         color: green;
@@ -266,14 +271,14 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     ```
 
 
-32. Create the `assets` folder in the root directory, then create the `css` folder within the `assets` directory. Copy the following code into a Sass file located at `assets/css/styles.scss`. The front matter blocks tells Jekyll that it needs to process this file remember, that is why they are included here. This code tells Sass to look for a file called `main.scss` located in a `_sass` directory within the root folder.
+34. Create the `assets` folder in the root directory, then create the `css` folder within the `assets` directory. Copy the following code into a Sass file located at `assets/css/styles.scss`. The front matter blocks tells Jekyll that it needs to process this file remember, that is why they are included here. This code tells Sass to look for a file called `main.scss` located in a `_sass` directory within the root folder.
     ```sass
     ---
     ---
     @import "main";
     ```
 
-33. Now reference this stylesheet in our default layout. Remember the posts layout inherits from the default, so we only need to add the stylesheet in one location. Add `<link rel="stylesheet" href="/assets/css/styles.css">` between the `<head>` and `</head>` tags in `_layouts/default.html`. The `_layouts/default.html` should now look like this.
+35. Now reference this stylesheet in our default layout. Remember the posts layout inherits from the default, so we only need to add the stylesheet in one location. Add `<link rel="stylesheet" href="/assets/css/styles.css">` between the `<head>` and `</head>` tags in `_layouts/default.html`. The `_layouts/default.html` should now look like this.
     ```html
     <!doctype html>
     <html>
@@ -290,7 +295,7 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     </html>
     ```
 
-34. Update `_includes/navigation.html` to use the new CSS class. Change `_includes/navigation.html` to the following code.
+36. Update `_includes/navigation.html` to use the new CSS class. Change `_includes/navigation.html` to the following code.
     ```html
     <nav>
         {% for item in site.data.navigation %}
@@ -299,4 +304,34 @@ The terminal commands are for a Ubuntu operating system, but should be able to b
     </nav>
     ```
 
-35. Congratulations! You now have a very basic website where content can be easily added. Want to write anothe blog post or add your most recent publication, simply add another markdown file and push to GitHub.
+
+**Congratulations!** You now have a very basic website where content can be easily added. Want to write anothe blog post or add your most recent publication, simply add another markdown file.
+
+## Deploying using GitHub Pages
+
+While a local website might be useful sometimes, we ideally want to publish our website to the world. We can do this using GitHub pages. However, before we get started there are some things to note.
+
+- Each github user and organisation gets one user/organisation webpage and can have unlimited number of project webpages. The name of your repo will dictate if it is your user webpage or a project page, as well as the URL. For your user webpage, create a repo with the name following the format `<github_username>.github.io`. For project webpages, you the repo can be called whatever you would like. User webpages will have the URL `<github_username>.github.io`. Project webpages will have URLs of the form `<github_username>.github.io/<repo_name>`.
+
+1. Create an empty GitHub repository.
+
+2. Initialise the local version of your repository using the root directory of your website. Push the files to the remote repository.
+
+3. Once pushed, on the repository's GitHub page, go to `Settings > Pages`. Under *Build and Deployment*
+    - Set *Source* to: `Deploy from a branch`
+    - Set *Branch* to: `main`
+    - Leave the directory as `/(root)`
+    - Click save.
+
+4. If your repo is using your user webpage, it will now be live at `<github_username>.github.io` (or after a minute or so). If your repo is a project webpage, it will be live at `<github_username>.github.io/<repo_name>`. 
+
+GitHub is running a GitHub Action under the hood. If your website is not live in a few minutes check the actions tab in your repository. This will be your first port of call for debugging deployment.
+
+### Project Webpages - Fixing Broken Links
+If you are using a project webpage you might find the links on the live site are not working. You are getting a 404 error or a redirection to a page you weren't expecting to see. This is because we need to set the `baseurl` configuration variable correctly. Some initial information detailing `baseurl` can be found [here](https://jekyllrb.com/docs/upgrading/0-to-2/#baseurl)
+
+1. In `_config.yml` add the line: `baseurl: /<repo_name>`
+2. In `_layouts/default.html` change the stylesheet link to the following: `<link rel="stylesheet" href="{{site.baseurl}}/assets/css/styles.css">`
+3. In `_includes/navigation.html` change the `href` line to the following: `<a href="{{site.baseurl}}{{ item.link }}" class="navbar-item">{{ item.name }}</a>`
+4. Test the website locally by running `bundle exec jekyll serve`, it will be served at `localhost:4000/<repo_name>`, and make sure everything looks good (links and styles).
+5. Push the changes to GitHub and check the live page.
