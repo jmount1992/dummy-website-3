@@ -366,7 +366,23 @@ Originally when GitHub Pages was released in 2008, the build and deploy process 
 We will first start by recreating the in-built action used to deploy GitHub Pages.
 
 1. First create the path `.github/workflows` within the website root directory.
-2. Go to the [pages starter-workerflows](https://github.com/actions/starter-workflows/blob/main/pages/jekyll-gh-pages.yml) provided by GitHub Actions (this is a great place to look for starting points for other actions too).
-3. Copy the contents of the `jekyll-gh-pages.yml` to a file called `jekyll-gh-pages.yml` located in `.github/workflows`. Tip: click on raw to make it easier to copy.
+2. Go to the [pages starter-workerflows](https://github.com/actions/starter-workflows/blob/main/pages) provided by GitHub Actions (this is a great place to look for starting points for other actions too).
+3. Copy the contents of the `jekyll-gh-pages.yml` to a file called `jekyll-gh-pages.yml` located at `.github/workflows`. Tip: click on raw to make it easier to copy.
 4. In your copy of the workflow change `[$default-branch]` to `main`. This tells it to run the workflow on pushes to main. 
 5. In your repository online, go to Settings > Pages and change the Source to GitHub Actions.
+6. Push your changes to the remote repository. If you go to the Actions tab on the repository you should see our new Action running, and after a minute or so, your site will be live. 
+
+There done! We have recreated the effect of the in-built GitHub Pages action and we have complete control over the automatic build process. What if I want to use the latest and greatest? Easy, in the [pages starter-workerflows](https://github.com/actions/starter-workflows/blob/main/pages) you should see a starter called `jekyll.yml`. Let's try and use that now. However, first, let's disable our current workflow. 
+
+1. Go to the Actions tab in your online repo. 
+2. Click the `Deploy Jekyll with GitHub Pages dependencies preinstalled` action on the left. 
+3. Click on the three dots next to the `Filter workflow runs` search bar.
+4. Click `Disable workflow`.
+
+Now, let's create a workflow to use the latest and greatest Jekyll. 
+
+1. First, we should change our Gemfile to use the Jekyll Gem rather than the Jekyll Gem that comes with the github-pages Gem. Do this by removing or commenting out the line `gem "github-pages", "~> 220", group: :jekyll_plugins` and by adding `gem "jekyll", "~> 4.3.1"`. If you want to know what the `"~> 4.3.1"` is doing, you can get some information [here](https://thoughtbot.com/blog/rubys-pessimistic-operator).
+2. Run `bundle update` in the terminal and re-serve the local website. Running `bundle update` will update the Gems based on what is on the Gemfile. You can check this by then running `bundle exec jekyll -v`, you should get `jekyll 4.3.x`.
+3. Copy the contents of the `jekyll.yml` [starter workflow](https://github.com/actions/starter-workflows/blob/main/pages) to a file called `jekyll.yml` located at `.github/workflows`. Hint: the filename you use doesn't have to match what GitHub uses.
+4. In your copy of the workflow change `[$default-branch]` to `main`.
+5. Push your changes to the remote repository and watch your new action do its thing!
