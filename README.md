@@ -55,7 +55,7 @@ Before we get started make sure you have Jekyll installed. You can follow the gu
     touch _layouts/default.html
     ```
 
-9. Add the following code to `_layouts/default.html`. The {% raw %}`{{ }}` and `{% %}`{% endraw %} are [Liquid](https://jekyllrb.com/docs/liquid/) syntax for objects and tags respectively. Objects contain content to be displayed on the page. Tags create logic and control flow for templates. Here we are getting the page title and content objects, as well as including the navigation.html file (we will create this file in the next steps).
+9. Add the following code to `_layouts/default.html`. The `{{ }}` and `{% %}` are [Liquid](https://jekyllrb.com/docs/liquid/) syntax for objects and tags respectively. Objects contain content to be displayed on the page. Tags create logic and control flow for templates. Here we are getting the page title and content objects, as well as including the navigation.html file (we will create this file in the next steps).
     ```html
     <!doctype html>
     <html>
