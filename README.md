@@ -387,3 +387,5 @@ Now, let's create a workflow to use the latest and greatest Jekyll.
 3. Copy the contents of the `jekyll.yml` [starter workflow](https://github.com/actions/starter-workflows/blob/main/pages) to a file called `jekyll.yml` located at `.github/workflows`. Hint: the filename you use doesn't have to match what GitHub uses.
 4. In your copy of the workflow change `[$default-branch]` to `main`.
 5. Push your changes to the remote repository and watch your new action do its thing!
+
+There you have it, we are now using the latest and greatest!
