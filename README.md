@@ -368,4 +368,5 @@ We will first start by recreating the in-built action used to deploy GitHub Page
 1. First create the path `.github/workflows` within the website root directory.
 2. Go to the [pages starter-workerflows](https://github.com/actions/starter-workflows/blob/main/pages/jekyll-gh-pages.yml) provided by GitHub Actions (this is a great place to look for starting points for other actions too).
 3. Copy the contents of the `jekyll-gh-pages.yml` to a file called `jekyll-gh-pages.yml` located in `.github/workflows`. Tip: click on raw to make it easier to copy.
-4. In your repository online, go to Settings > Pages and change the Source to GitHub Actions.
+4. In your copy of the workflow change `[$default-branch]` to `main`. This tells it to run the workflow on pushes to main. 
+5. In your repository online, go to Settings > Pages and change the Source to GitHub Actions.
