@@ -20,10 +20,10 @@ Before we get started make sure you have Jekyll installed. You can follow the gu
     touch Gemfile
     ```
 
-3. Add the following to the Gemfile.
+3. Add the following to the Gemfile. We will talk about this more later.
     ```ruby
     source "https://rubygems.org"
-    gem "jekyll"
+    gem "github-pages", "~> 220", group: :jekyll_plugins
     ```
 
 4. Install the Gems
@@ -36,7 +36,7 @@ Before we get started make sure you have Jekyll installed. You can follow the gu
     touch index.md
     ```
 
-6. Add the following codee to `index.md`. Any code between the two sets of `---` are what is called front matter. Jekyll will only process any files that contain front matter. That is why this ReadMe file gets skipped. It does not contain any front matter.
+6. Add the following code to `index.md`. Any code between the two sets of `---` are what is called front matter. Jekyll will only process any files that contain front matter. That is why this ReadMe file gets skipped. It does not contain any front matter.
     ```markdown
     ---
     ---
@@ -326,11 +326,46 @@ While a local website might be useful sometimes, we ideally want to publish our 
 
 GitHub is running a GitHub Action under the hood. If your website is not live in a few minutes check the actions tab in your repository. This will be your first port of call for debugging deployment.
 
-### Project Webpages - Fixing Broken Links
-If you are using a project webpage you might find the links on the live site are not working. You are getting a 404 error or a redirection to a page you weren't expecting to see. This is because we need to set the `baseurl` configuration variable correctly. Some initial information detailing `baseurl` can be found [here](https://jekyllrb.com/docs/upgrading/0-to-2/#baseurl)
+### Project Webpages - Configuring BaseURL
+If you are using a project webpage you might find the links on the live site are not working. You might be getting a 404 error or a redirection to a page you weren't expecting to see. This is because we need to set the `baseurl` configuration variable correctly. Some initial information detailing `baseurl` can be found [here](https://jekyllrb.com/docs/upgrading/0-to-2/#baseurl)
 
 1. In `_config.yml` add the line: `baseurl: /<repo_name>`
 2. In `_layouts/default.html` change the stylesheet link to the following: `<link rel="stylesheet" href="{{site.baseurl}}/assets/css/styles.css">`
 3. In `_includes/navigation.html` change the `href` line to the following: `<a href="{{site.baseurl}}{{ item.link }}" class="navbar-item">{{ item.name }}</a>`
 4. Test the website locally by running `bundle exec jekyll serve`, it will be served at `localhost:4000/<repo_name>`, and make sure everything looks good (links and styles).
 5. Push the changes to GitHub and check the live page.
+
+## A Little More About Gemfile and Bundler
+
+A Gemfile is a list of dependencies required by your Ruby project. Bundler is a special Gem and acts like a package manager and virtual environment. If you are familiar with Python and Pip, you can think of a Gemfile similar to a requirements.txt and Bundler similar to Pip. However, we can also use bundler to execute commands using the current environment by prefixing the command with `bundle exec`. If you wish, do the following.
+
+1. While in your website root directory, run `jekyll -v`. You should get `Jekyll 3.9.x` printed to the terminal.
+2. Now, also in your website root directory, run `bunbdle exec jekyll -v`. You should again get `Jekyll 3.9.x` printed to the terminal.
+3. Go up on level (i.e., to the directory containing your website root folder), and run `jekyll -v`. You most likely will get `Jekyll 4.3.x`.
+
+In steps 1 and 2 we are calling the project specific Jekyll Gem, as indiciated by our Gemfile. In steps 3 we are calling the system wide installed Jekyll Gem. Why can't we simply do step 1 then? Well, while it is calling the project specific Jekyll Gem, it may end up still using system wide installed Gems. Hence, if we do the second option we are saying to use the Gems as specified by the Gemfile. 
+
+Hold up? We never specified a Jekyll version in our Gemfile. We only had two lines of code.
+
+```ruby
+source "https://rubygems.org"
+gem "github-pages", "~> 220", group: :jekyll_plugins
+```
+
+The [github-pages](https://github.com/github/pages-gem) Gem is a gem that install the Gem versions utilised by the GitHub Pages servers. This includes a dependency on Jekyll 3.9.x, currently. Hence, why we are getting access to Jekyll. You can see a full list of github-pages Gem dependencies [here](https://pages.github.com/versions/). Using this Gem is the easiest way if:
+
+- You want to use GitHub Pages in-built GitHub Action for building and deploying your website; and
+- You want to guarantee that what you get on your locally served version is the same as what GitHub Pages will produce.
+
+You may have noted that Jekyll is up to version 4+ but, GitHub Pages only using `3.9.x` currently. So, while using github-pages Gem and the in-built GitHub Pages Action for deploying is nice and easy, it doesn't give us the latest and greatest. 
+
+## Getting the Latest and Greatest - Using Custom GitHub Actions
+
+Originally when GitHub Pages was released in 2008, the build and deploy process was quite obscure and hard to debug when things went wrong. However, the release of [GitHub Actions](https://github.com/features/actions) in 2018 allowed for automatic build and deployment pipelines. GitHub Pages started using GitHub Actions in December 2021 for all public repositories. So, while it is relatively new, it is actually quite simple to create a custom action.
+
+We will first start by recreating the in-built action used to deploy GitHub Pages.
+
+1. First create the path `.github/workflows` within the website root directory.
+2. Go to the [pages starter-workerflows](https://github.com/actions/starter-workflows/blob/main/pages/jekyll-gh-pages.yml) provided by GitHub Actions (this is a great place to look for starting points for other actions too).
+3. Copy the contents of the `jekyll-gh-pages.yml` to a file called `jekyll-gh-pages.yml` located in `.github/workflows`. Tip: click on raw to make it easier to copy.
+4. In your repository online, go to Settings > Pages and change the Source to GitHub Actions.
