@@ -134,7 +134,6 @@ Before we get started make sure you have Jekyll installed. You can follow the gu
     ---
     # Publications
     ```
-    ```
 
 19. Add the following code to `posts.md`.
     ```markdown
