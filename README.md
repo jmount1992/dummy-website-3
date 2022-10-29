@@ -332,8 +332,9 @@ If you are using a project webpage you might find the links on the live site are
 1. In `_config.yml` add the line: `baseurl: /<repo_name>`
 2. In `_layouts/default.html` change the stylesheet link to the following: `<link rel="stylesheet" href="{{site.baseurl}}/assets/css/styles.css">`
 3. In `_includes/navigation.html` change the `href` line to the following: `<a href="{{site.baseurl}}{{ item.link }}" class="navbar-item">{{ item.name }}</a>`
-4. Test the website locally by running `bundle exec jekyll serve`, it will be served at `localhost:4000/<repo_name>`, and make sure everything looks good (links and styles).
-5. Push the changes to GitHub and check the live page.
+4. In `posts.md` change `## [{{ post.title }}]({{ post.url }})` to `## [{{ post.title }}]({{ site.baseurl }}{{ post.url }})`.
+5. Test the website locally by running `bundle exec jekyll serve`, it will be served at `localhost:4000/<repo_name>`, and make sure everything looks good (links and styles).
+6. Push the changes to GitHub and check the live page.
 
 ## A Little More About Gemfile and Bundler
 
