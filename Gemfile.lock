@@ -64,7 +64,8 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 4.3.1)
+  tzinfo-data
   webrick (~> 1.7)
 
 BUNDLED WITH
-   2.3.24
+   2.3.25
